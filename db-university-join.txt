@@ -41,3 +41,10 @@
     WHERE `departments`.`name` = "Dipartimento di Matematica"
 
 7. BONUS: Selezionare per ogni studente il numero di tentativi sostenuti per ogni esame, stampando anche il voto massimo. Successivamente, filtrare i tentativi con voto minimo 18.
+    SELECT `students`.`surname`, COUNT(*) AS `esami_sostenuti`, MAX(`exam_student`.`vote`) AS `voto_massimo`
+    FROM `students`
+    INNER JOIN `exam_student` ON `exam_student`.`student_id` = `students`.`id`
+    INNER JOIN `exams` ON `exam_student`.`exam_id` = `exams`.`id`
+    GROUP BY `students`.`id`
+    HAVING `voto_massimo` >= 18
+    ORDER BY `voto_massimo` ASC;
